@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Exploring Chart.js</title>
+	
+	
+<script>
+
+
+function populate(s1,s2){
+	
+	var s1 = document.getElementById(s1);
+	var s2 = document.getElementById(s2);
+	
+	s2.innerHTML = "";
+	console.log(s1.value);
+	if(s1.value == "comida"){
+		
+		var optionArray = ["|","fruta|Fruta","verdura|Verdura","carne|Carne"];
+	} else if(s1.value == "roupa"){
+		var optionArray = ["|","calca|Calca","blusa|Blusa"];
+	} else if(s1.value == "carro"){
+		var optionArray = ["|","volkswagem|Volkswagem","fiat|Fiat"];
+	}
+	for(var option in optionArray){
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		s2.options.add(newOption);
+	}
+}
+
+function populate2(s1,s2){
+	var s1 = document.getElementById(s1);
+	var s2 = document.getElementById(s2);
+	
+	s2.innerHTML = "";
+	console.log(s1.value);
+	if(s1.value == "fruta"){
+		var optionArray = ["|","goiaba|Goiaba","laranja|Laranja","morango|Morango"];
+	} else if(s1.value == "verdura"){
+		var optionArray = ["|","cebola|Cebola","cenoura|Cenoura","alho|Alho"];
+	} else if(s1.value == "carne"){
+		var optionArray = ["|","frango|Frango","boi|Boi"];
+	}else if(s1.value == "calca"){
+		var optionArray = ["|","dakota|Dakota","rotadomar|Rotadomar"];
+	}else if(s1.value == "blusa")
+	{
+		var optionArray = ["|","kyoto|Kyoto"];
+	}
+	else if(s1.value == "volkswagem"){
+		var optionArray = ["|","gol|Gol","golf|Golf"];
+	} else if(s1.value == "fiat")
+		var optionArray = ["|","fiatuno|FiatUno","toro|Toro"];
+	
+	
+	for(var option in optionArray){
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		s2.options.add(newOption);
+	}
+	
+	
+}
+
+function loadValue(s1)
+{
+	var s1 = document.getElementById(s1)
+	if(s1.value == 'goiaba')
+	{
+		data = [ 200, 200 , 150, 200]; 
+	}
+	else if(s1.value == 'laranja')
+	{
+		data = [ 1200, 1100 , 1150, 780];	
+	}
+	else if(s1.value == 'morango')
+	{
+		data = [ 2000, 2400 , 1500, 2700];
+	}
+	else if(s1.value == 'cenoura')
+	{
+		data = [ 1200, 3200 , 1150, 2200];
+	}
+	else if(s1.value == 'alho')
+	{
+		data = [123,35,2,20]
+	}
+	else if(s1.value == 'frango')
+	{
+		data = [ 4200, 5200 , 3150, 6200];
+	}
+	else if(s1.value == 'boi')
+	{
+		data = [ 2200, 3200 , 4150, 5200];
+	}
+	else if(s1.value == 'dakota')
+	{
+		data = [ 2200, 3200 , 4150, 5200];
+	}
+	else if(s1.value == 'rotadomar')
+	{
+		data = [ 21000, 12000 , 41500, 52000];
+	}
+	else if(s1.value == 'gol')
+	{
+		data = [ 21000, 12000 , 41500, 52000];
+	}
+	else if(s1.value == 'golf')
+	{
+		data = [ 10, 50 , 20, 100];
+	}
+	else if(s1.value == 'fiatuno')
+	{
+		data = [ 50, 50 , 50, 50];
+	}
+	else if(s1.value == 'toro')
+	{
+		data = [ 10, 50 , 20, 100];
+	}
+	else if(s1.value == 'kyoto')
+	{
+		data = [10, 50, 20, 100]
+	}
+
+	
+	renderChart(data);
+}
+</script>	
+	
+
+</head>
+
+
+
+<body>
+<div class="w3-container">
+
+<div class="w3-panel w3-padding-64">
+ <div class="row" >
+    <div class="col-sm-4"  >
+	
+	Categoria:
+		<select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+		  <option value=""></option>
+		  <option value="comida">comida</option>
+		  <option value="roupa">roupa</option>
+		  <option value="carro">carro</option>
+		</select>
+	</div>
+    <div class="col-sm-4" ">
+		Produto:
+		<select id="slct2" name="slct2" onchange="populate2(this.id,'slct3')" ></select>
+	</div>
+    <div class="col-sm-4" >
+	
+		Marca:
+		<select id="slct3" name="slct3" onchange = "loadValue(this.id)"></select>
+	</div>
+  </div>
+  </div>
+<div>
+
+    <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+	
+  
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="./myChart.js"></script>
+
+
+</html>
